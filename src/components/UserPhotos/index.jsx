@@ -4,14 +4,19 @@ import { Link, useParams } from "react-router-dom";
 
 import "./styles.css";
 import fetchModel from "../../lib/fetchModelData";
-
+import axios from "axios"; 
 function UserPhotos() {
   const { userId } = useParams();
 
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    fetchModel(`http://localhost:8081/api/photo/photosOfUser/${userId}`)
+    
+
+    axios.get(`http://localhost:8081/api/photo/photosOfUser/${userId}`, { 
+        withCredentials: true 
+    })
+
       .then((response) => {
         setPhotos(response.data);
       })

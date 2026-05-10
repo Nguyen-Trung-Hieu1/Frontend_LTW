@@ -4,14 +4,18 @@ import "./styles.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import fetchModel from "../../lib/fetchModelData";
-
+import axios from "axios"; 
 function UserDetail() {
   const { userId } = useParams();
 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetchModel(`http://localhost:8081/api/user/${userId}`)
+    
+    axios.get(`http://localhost:8081/api/user/${userId}`, { 
+        withCredentials: true 
+    })
+    
       .then((response) => {
         setUser(response.data);
       })
